@@ -38,14 +38,11 @@ int main() {
   auto R = ConstantFP::get(TheContext, APFloat(5.0));
   auto f = Builder.CreateFAdd(L, R, "addtmp");
   f->print(errs());
-
   InitializeAllTargetInfos();
-  /*
   InitializeAllTargets();
   InitializeAllTargetMCs();
   InitializeAllAsmParsers();
   InitializeAllAsmPrinters();
-  */
 
   return 0;
 }
