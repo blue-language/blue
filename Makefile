@@ -1,10 +1,11 @@
-CFLAGS = -O3 -I/usr/usr/lib/llvm-8/include/llvm
+INCLUDES = -I/usr/usr/lib/llvm-8/include/llvm -I/include
+CFLAGS = -O3 -std=c++17
 LDFLAGS = `llvm-config-8 --cxxflags --ldflags --system-libs --libs all`
 
 .PHONY: build
 build:
 	@mkdir -p bin
-	@g++ main.cpp $(CFLAGS) $(LDFLAGS) -o bin/bluec
+	g++-8 src/main.cpp $(INCLUDES) $(LDFLAGS) $(CFLAGS) -o bin/bluec
 
 .PHONY: clean
 clean:
