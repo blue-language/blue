@@ -1,1 +1,6 @@
-313
+repeat(string s, int n):
+  return n <= 0 ? s : repeat(s + s, n-1);
+    
+main: 
+  var res = repeat('abc', 1)
+  print_newline(res);

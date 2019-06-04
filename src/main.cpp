@@ -2,8 +2,9 @@
 #include <algorithm>
 #include <string>
 #include <vector>
-#include <fstream>
-#include <tuple>
+
+#include "parser.h"
+
 using namespace std;
 
 string findCliArgumentElseDefault(const vector<string>& cliArguments, const string& argument, const string& _default) {
@@ -23,24 +24,13 @@ string getOutputFilenameElseDefault(const vector<string>& cliArguments) {
   return findCliArgumentElseDefault(cliArguments, "-o", "out");
 }
 
-tuple<bool, int> readTheMagicNumber(const string& inputFilename) {
-  ifstream in{inputFilename};
-  if (in.is_open()) {
-    int theMagicNumber;
-    in >> theMagicNumber;
-    return {true, theMagicNumber};
-  }
-
-  cout << "Could not open file '" << inputFilename << "'" << endl;
-  return {false, 0};
-}
-
 int main(int argc, char** argv) {
   auto cliArguments = vector<string>(argv, argv + argc);
   auto inputFilename = getInputFilenameElseDefault(cliArguments);
   auto outputFilename = getOutputFilenameElseDefault(cliArguments);
 
-  auto [success, magicNumber] = readTheMagicNumber(inputFilename);
+  auto parser = Parser();
+  parser.parse(inputFilename);
 
   return 0;
 }
